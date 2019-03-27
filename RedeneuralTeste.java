@@ -32,11 +32,9 @@ public class RedeneuralTeste {
 			for(int i=0; i<this.pesos.length; i++) {
 				VALIDACAO = !(VALIDACAO && (this.pesos[i] == this.pesosAnterior[i]));
 				if(VALIDACAO) {
-					System.out.println("Parou!");
+					System.out.println(" Parou!");
 					break;
 				}
-					
-					
 			}
 			
 			//somatorio das entradas no neuronio
@@ -71,7 +69,7 @@ public class RedeneuralTeste {
 	}
 	
 	private double atualizaPesos(double hebb, double limiar, int xis) {
-		System.out.println(hebb);
+		System.out.print(" " + hebb);
 		if(hebb != limiar) {
 			return this.taxaAprendizado * (this.limiar - hebb) * xis;
 		}
