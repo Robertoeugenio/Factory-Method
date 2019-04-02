@@ -59,6 +59,7 @@ public class RedeneuralTeste {
 		return 0;
 	}
 	
+	//teste
 	private int hebb(double yent) {
 		if(yent>this.limiar) 
 			return 1;

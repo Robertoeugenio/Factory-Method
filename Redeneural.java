@@ -1,11 +1,14 @@
 package teste;
 
+import java.util.Locale;
 import java.util.Random;
 import java.util.Scanner;
 
-public class Redeneural {
+public class RedeNeural {
 	public static void main(String[] args) {
 		Scanner in = new Scanner(System.in);
+		in.useLocale(Locale.ENGLISH);
+		
 		int x[][] = {{1,1,1,1,0,0,0,0},//x1
 					 {1,1,0,0,1,1,0,0},//x2
 					 {1,0,1,0,1,0,1,0},//x3
@@ -20,7 +23,10 @@ public class Redeneural {
 		int yent[] ={0,0,0,0,0,0,0,0}; //variáveis de cálculo
 		int fyent[]={1,0,0,0,0,0,0,0};
 		int wcontrol; //contador para saber se w é diferente de wa (ou seja, se houve variacao de w)
+		double limiar=0.0;//é o TÉTA
 		//int[][] x = new int[8][4];
+		System.out.print("Fornceça Teta: ");
+		limiar = in.nextDouble();
 
 		do {
 			wcontrol=0;
@@ -34,11 +40,11 @@ public class Redeneural {
 					////cálculo da saída do neurônio
 					//f(Yent)  = 
 					// 1 se Yent >  0
-					if(yent[j]>0)  fyent[j]=1;
+					if(yent[j]>limiar)  fyent[j]=1;
 					// 0 se -0 <= Yent <=0
-					if(yent[j]==0) fyent[j]=0;
+					if(yent[j]==limiar) fyent[j]=0;
 					//-1 se Yent < -0
-					if(yent[j]<0)  fyent[j]=-1;
+					if(yent[j]<limiar)  fyent[j]=-1;
 					//System.out.print(" " + fyent[j]);
 	
 				}
@@ -60,8 +66,9 @@ public class Redeneural {
 					}
 				}
 			}
+			
 			for (int y=0 ; y<4 ; y++) {
-				System.out.print(w[y]);
+				System.out.print("Peso: " + w[y] + " ");
 				if(wa[y] != w[y]) {
 					wa[y]=w[y];
 					wcontrol++;
