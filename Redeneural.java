@@ -14,17 +14,20 @@ public class RedeNeural {
 					 {1,0,1,0,1,0,1,0},//x3
 					 {1,1,1,1,1,1,1,1}};//1
 		int  t[] = {1,0,0,0,0,0,0,0};
-		int w[]  = {0,0,0,0,}; //pesos já zerados
-		int wa[] = {0,0,0,0,}; //pesos antigos já zerados
+		double w[]  = {0,0,0,0,}; //pesos já zerados
+		double wa[] = {0,0,0,0,}; //pesos antigos já zerados
 		double n=0; //taxa de aprendizado (entre 0 e 1) ENTRADA PELO USUARIO
 		Random gerador = new Random();
-		int b[] = {0,0,0,0,}; // é bias  (peso que indica o viés do neurônio)
-		int o=0; //LINEAR - ENTRADA PELO USUARIO
-		int yent[] ={0,0,0,0,0,0,0,0}; //variáveis de cálculo
-		int fyent[]={1,0,0,0,0,0,0,0};
+		double b[] = {0,0,0,0,}; // é bias  (peso que indica o viés do neurônio)
+		double o=0; //LINEAR - ENTRADA PELO USUARIO
+		double yent[] ={0,0,0,0,0,0,0,0}; //variáveis de cálculo
+		double fyent[]={1,0,0,0,0,0,0,0};
 		int wcontrol; //contador para saber se w é diferente de wa (ou seja, se houve variacao de w)
 		double limiar=0.0;//é o TÉTA
 		//int[][] x = new int[8][4];
+		System.out.print("Fornceça N: ");
+		n = in.nextDouble();
+
 		System.out.print("Fornceça Teta: ");
 		limiar = in.nextDouble();
 
@@ -56,19 +59,19 @@ public class RedeNeural {
 					//atualização dos pesos do neurônio
 					//Se (fYent != t)
 					if(fyent[k] != t[k]) {
-						n=gerador.nextDouble();
-						//System.out.println(n);
+						//n=gerador.nextDouble();
+						System.out.println(n);
 						//então: W = n * (T – fYent) * X
-						w[l] = (int) Math.round (n * (t[k] - fyent[k]) * x[l][k]);
+						w[l] = n * (t[k] - fyent[k]) * x[l][k];
 						//b = n * (T - fYent)
-						b[l] = (int) Math.round (n * (t[k] - fyent[k]));
+						b[l] = n * (t[k] - fyent[k]);
 						
 					}
 				}
 			}
 			
 			for (int y=0 ; y<4 ; y++) {
-				System.out.print("Peso: " + w[y] + " ");
+				System.out.print("Pesos: " + w[y] + " ");
 				if(wa[y] != w[y]) {
 					wa[y]=w[y];
 					wcontrol++;
@@ -76,5 +79,29 @@ public class RedeNeural {
 			}
 			System.out.println();
 		} while(wcontrol!=0);
+		
+/*		int xu1, xu2, xu3;
+		System.out.print("Fornceça X1: ");
+		xu1 = in.nextInt();
+		System.out.print("Fornceça X2: ");
+		xu2 = in.nextInt();
+		System.out.print("Fornceça X3: ");
+		xu3 = in.nextInt();
+		
+		//System.out.print(" " + x[i][j]);
+		yent[j] = x[i][j] * w[i] + b[i];
+		//System.out.print(" " + yent);
+		
+		////cálculo da saída do neurônio
+		//f(Yent)  = 
+		// 1 se Yent >  0
+		if(yent[j]>limiar)  fyent[j]=1;
+		// 0 se -0 <= Yent <=0
+		if(yent[j]==limiar) fyent[j]=0;
+		//-1 se Yent < -0
+		if(yent[j]<limiar)  fyent[j]=-1;
+		//System.out.print(" " + fyent[j]);
+*/
+	
 	}
 }
